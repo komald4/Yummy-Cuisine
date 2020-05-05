@@ -8,7 +8,7 @@ class RecipeContainer extends React.Component{
         console.log(this.props)
         
         return (
-            <div>
+            <div >
                 <button onClick={() => this.props.handleClick()}>This is all the Recipes</button>
                 {this.props.display && this.props.userRecipe.map(userdata => <RecipeCard userdata={userdata} key={userdata.id}/>)}
             </div>
