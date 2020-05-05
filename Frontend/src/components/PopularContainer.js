@@ -5,7 +5,7 @@ class PopularContainer extends React.Component{
     render(){
         return (
             <div>
-                <h1>Hello</h1>
+                <h1>Popular</h1>
             </div>
         )
     }

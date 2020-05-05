@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NavbarContainer from './components/NavbarContainer'
+import FavoriteContainer from './components/FavoriteContainer'
+import RecipeContainer from './components/RecipeContainer'
+import PopularContainer from './components/PopularContainer'
+
+const Url = 'http://localhost:3000/user_recipes'
+
+class App extends React.Component{
+  
+  state = {
+    userRecipe: [],
+    display: false
+  }
+
+  componentDidMount(){
+    fetch(Url)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        userRecipe: data
+      })
+    })
+  }
+
+  handleClick = () => {
+    this.setState({
+      display: !this.state.display
+    })
+  }
+
+  render(){
+    console.log(this.state.userRecipe)
+
+    return (
+      <div className="App">
+        <header >
+        <NavbarContainer />
+        </header>
+        <FavoriteContainer />
+        <RecipeContainer handleClick={this.handleClick} userRecipe={this.state.userRecipe} display={this.state.display}/>
+        <PopularContainer />
+      </div>
+    );
+  }
+
 }
 
 export default App;
